@@ -11,43 +11,77 @@ app.use(express.static('public'));
 
 // Creating a route for my website
 app.get('/', (req, res) => {
-  res.render('index', {
-    name: 'C3-PO',
-    colors: ['gold', 'silver', 'red'],
-    languages: 'yes'
-  });
+  res.render('index',allRobots[1]);
 });
 
+// This array is only for demostration purposes
+// in the `future` this would a database
+const allRobots = [
+  {
+    id:1,
+    name: 'R2-D2',
+    colors: ['blue', 'white'],
+    languages: 'beep-boop'
+  },{
+    id:2,
+    name: 'R4',
+    colors: ['gold', 'green', 'white']
+  },
+  {
+    id:3,
+    name: 'BB-8',
+    colors: ['orange', 'white']
+  },
+  {
+    id:4,
+   name: 'C3-PO',
+   colors: ['gold', 'silver', 'red'],
+   languages: 'yes'
+ }
+];
 // Creating an endpoint for my API
 // this endpoint is where the back end
 // meets the front end
 // the front can see this url (/api/robot)
 // the front can see the return data as JSON
-app.get('/api/robot', (req, res) => {
-  // in the `future` this will come from a database instead of being
-  // hardcoded
-  const myRobot = {
-    name: 'R2-D2',
-    colors: ['blue', 'white'],
-    languages: 'beep-boop'
-  };
+app.get('/api/robots/:id', (req, res) => {
+  const robotId = parseInt(req.params.id)
+  // go my "database"
+  const myRobot = allRobots.find(bot => bot.id === robotId)
   // this is how we retrun JSON from an endpoint
   res.json(myRobot);
 });
 
+// RESTFUL - GET all robots
 app.get('/api/robots', (req, res) => {
-  const allRobots = [
-    {
-      name: 'R4',
-      colors: ['gold', 'green', 'white']
-    },
-    {
-      name: 'BB-8',
-      colors: ['orange', 'white']
-    }
-  ];
+
   res.json(allRobots);
 });
+// // NOT RESTUL endpoints DONT DO THIS!!!!!!
+// app.post('/api/get/robots/all', (req, res) => {
+//   const allRobots = [
+//     {
+//       name: 'R4',
+//       colors: ['gold', 'green', 'white']
+//     },
+//     {
+//       name: 'BB-8',
+//       colors: ['orange', 'white']
+//     }
+//   ];
+//   res.json(allRobots);
+// })
+// RESTful endpoints Are going here
+
+// CREATE a robot
+// GET a robot
+// GET a robots colors
+
+// UPdate a robot
+// delete a robot
+
+
+
 
 app.listen(3000, () => {
   console.log('We are rocking on 3000');
