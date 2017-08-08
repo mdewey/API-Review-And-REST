@@ -1,5 +1,6 @@
 const express = require('express');
 const mustacheExpress = require('mustache-express');
+const bodyParser = require('body-parser')
 
 const app = express();
 // tell our to use mustahce
@@ -8,6 +9,9 @@ app.set('views', './views');
 app.set('view engine', 'mst');
 // define a public folder
 app.use(express.static('public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extend:false}))
 
 // Creating a route for my website
 app.get('/', (req, res) => {
@@ -56,7 +60,6 @@ app.get('/api/robots/:id', (req, res) => {
 
 // RESTFUL - GET all robots
 app.get('/api/robots', (req, res) => {
-
   res.json(allRobots);
 });
 // // NOT RESTUL endpoints DONT DO THIS!!!!!!
@@ -76,7 +79,19 @@ app.get('/api/robots', (req, res) => {
 // RESTful endpoints Are going here
 
 // CREATE a robot
-// GET a robot
+app.post('/api/robots', (req, res)=> {
+  // get data from the body
+  let newRobot = {
+    id: allRobots.length +1, // NOTE: the new ID will be handled by the database
+    name:req.body.name,
+    colors:req.body.colors,
+    languages:req.body.languages
+  }
+  // add to our "database"
+  allRobots.push(newRobot)
+  // return something
+  res.json(newRobot)
+});
 // GET a robots colors
 
 // UPdate a robot
