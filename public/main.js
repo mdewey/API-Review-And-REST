@@ -12,3 +12,25 @@ fetch(url).then(resp => resp.json()).then(json => {
   let output = document.querySelector('#output');
   output.appendChild(container);
 });
+
+const allRobotsUrl = '/api/robots';
+fetch(allRobotsUrl).then(resp => resp.json()).then(allRobots => {
+  console.log(allRobots);
+  allRobots.forEach(droid => {
+    let container = document.createElement('div');
+    container.textContent = droid.name;
+    let output = document.querySelector('#output');
+    output.appendChild(container);
+  })
+
+
+});
+
+
+
+
+
+
+
+
+////

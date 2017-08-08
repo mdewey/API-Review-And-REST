@@ -35,6 +35,20 @@ app.get('/api/robot', (req, res) => {
   res.json(myRobot);
 });
 
+app.get('/api/robots', (req, res) => {
+  const allRobots = [
+    {
+      name: 'R4',
+      colors: ['gold', 'green', 'white']
+    },
+    {
+      name: 'BB-8',
+      colors: ['orange', 'white']
+    }
+  ];
+  res.json(allRobots);
+});
+
 app.listen(3000, () => {
   console.log('We are rocking on 3000');
 });
