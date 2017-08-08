@@ -47,7 +47,9 @@ const allRobots = [
 app.get('/api/robots/:id', (req, res) => {
   const robotId = parseInt(req.params.id)
   // go my "database"
-  const myRobot = allRobots.find(bot => bot.id === robotId)
+  const myRobot = allRobots.find(bot => {
+    return bot.id === robotId
+  })
   // this is how we retrun JSON from an endpoint
   res.json(myRobot);
 });
