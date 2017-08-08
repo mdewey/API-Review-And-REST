@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+      <h2>Check my Robots</h2>
+      <section id="output">
+
+      </section>
+      <section id="serverRender">
+        {{name}}
+        <ul>
+        {{#colors}}
+          <li>{{.}}</li>
+        {{/colors}}
+      </ul>
+      </section>
+      <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
