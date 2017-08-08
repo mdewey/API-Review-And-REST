@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 // This array is only for demostration purposes
 // in the `future` this would a database
-const allRobots = [
+let allRobots = [
   {
     id:1,
     name: 'R2-D2',
@@ -95,8 +95,15 @@ app.post('/api/robots', (req, res)=> {
 // GET a robots colors
 
 // UPdate a robot
-// delete a robot
-
+// disassemble a robot
+app.delete('/api/robots/:id', (req, res) => {
+    // get the id from the request
+    const robotId = parseInt(req.params.id)
+    // delete the robot from the "database"
+    allRobots = allRobots.filter(bot => bot.id !== robotId)
+    // return something??
+    res.json(allRobots)
+})
 
 
 
